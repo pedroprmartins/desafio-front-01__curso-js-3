@@ -34,40 +34,49 @@ function sortear() {
 
     document.getElementById('btn-sortear').className = 'container__botao-desabilitado';
     document.getElementById('btn-reiniciar').className = 'container__botao';
+
     atualizarTexto();
-    numerosSorteados = [];
 }
 
 function reiniciar() {
     limparCampos();
+
     let textoDiv = document.getElementById('resultado');
     let textoLabel = textoDiv.querySelector('label');
+
     textoLabel.textContent = 'Números sorteados:  nenhum até agora';
+
     document.getElementById('btn-reiniciar').className = 'container__botao-desabilitado';
     document.getElementById('btn-sortear').className = 'container__botao';
+
     seCamposVazios();
 }
 
-function numeroAleatorio(numInicial, numFinal) {
-    return parseInt(Math.random() * numFinal + numInicial);
+function numeroAleatorio(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function atualizarTexto() {
     let textoDiv = document.getElementById('resultado');
     let textoLabel = textoDiv.querySelector('label');
+
     textoLabel.textContent = `Números sorteados: ${numerosSorteados}`;
+
+    numerosSorteados = [];
 }
 
 function limparCampos() {
     document.getElementById('quantidade').value = '';
     document.getElementById('de').value = '';
     document.getElementById('ate').value = '';
+
     numerosSorteados = [];
 }
 
 function seCamposVazios() {
     let campos = document.querySelectorAll('input');
     let botaoSortear = document.getElementById('btn-sortear');
+
     algumCampoVazio = Array.from(campos).some(input => !input.value);
     botaoSortear.disabled = algumCampoVazio;
 
