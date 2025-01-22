@@ -17,12 +17,18 @@ function sortear() {
         limparCampos();
         alert('O valor inicial não pode ser maior que o valor final!');
     } else {
-        for (let i = 0; i < qtdNumeros; i++) {
-            resultado = numeroAleatorio(valorInicial, valorFinal);
-            while (numerosSorteados.includes(resultado)) {
+        const qtdPossivel = valorFinal - valorInicial + 1;
+        if (qtdNumeros > qtdPossivel) {
+            limparCampos();
+            alert('Não é possível sortear!');
+        } else {
+            for (let i = 0; i < qtdNumeros; i++) {
                 resultado = numeroAleatorio(valorInicial, valorFinal);
+                while (numerosSorteados.includes(resultado)) {
+                    resultado = numeroAleatorio(valorInicial, valorFinal);
+                }
+                numerosSorteados.push(resultado);
             }
-            numerosSorteados.push(resultado);
         }
     }
 
@@ -56,6 +62,7 @@ function limparCampos() {
     document.getElementById('quantidade').value = '';
     document.getElementById('de').value = '';
     document.getElementById('ate').value = '';
+    numerosSorteados = [];
 }
 
 function seCamposVazios() {
